@@ -57,35 +57,15 @@
 		}
 	}
 	
-	// echo "
-	// <table cellpadding=0 cellspacing=0 border='1'>
-	// 	<thead>
-	// 		<tr>
-	// 			<th></th>
-	// 			<th>PO<br>".displayText('L855')."</th>
-	// 			<th>NO.</th>
-	// 			<th>".displayText('L367')."</th>
-	// 			<th>".displayText('L516')."</th>
-	// 			<th>".displayText('L342')."</th>
-	// 			<th>".displayText('L132')."</th>
-	// 			<th>".displayText('L246')."</th>
-	// 			<th>".displayText('L247')."</th>
-	// 			<th>".displayText('L31')."</th>
-	// 			<th>".displayText('L112')."</th>
-	// 			<th>".displayText('L32')."</th>
-	// 			<th>".displayText('L743')."</th>
-	// 			<th>".displayText('L172')."</th>
-	// 			<th>".displayText('L1698')."</th>
-	// 		</tr>
-	// 	</thead>
-	// ";
 	echo "
 	<table cellpadding=0 cellspacing=0 border='1'>
 		<thead>
 			<tr>
 				<th></th>
 				<th>PO<br>".displayText('L855')."</th>
+				<th>NO.</th>
 				<th>".displayText('L367')."</th>
+				<th>".displayText('L516')."</th>
 				<th>".displayText('L342')."</th>
 				<th>".displayText('L132')."</th>
 				<th>".displayText('L246')."</th>
@@ -95,10 +75,30 @@
 				<th>".displayText('L32')."</th>
 				<th>".displayText('L743')."</th>
 				<th>".displayText('L172')."</th>
-				<th></th>
+				<th>".displayText('L1698')."</th>
 			</tr>
 		</thead>
 	";
+	// echo "
+	// <table cellpadding=0 cellspacing=0 border='1'>
+	// 	<thead>
+	// 		<tr>
+	// 			<th></th>
+	// 			<th>PO<br>".displayText('L855')."</th>
+	// 			<th>".displayText('L367')."</th>
+	// 			<th>".displayText('L342')."</th>
+	// 			<th>".displayText('L132')."</th>
+	// 			<th>".displayText('L246')."</th>
+	// 			<th>".displayText('L247')."</th>
+	// 			<th>".displayText('L31')."</th>
+	// 			<th>".displayText('L112')."</th>
+	// 			<th>".displayText('L32')."</th>
+	// 			<th>".displayText('L743')."</th>
+	// 			<th>".displayText('L172')."</th>
+	// 			<th></th>
+	// 		</tr>
+	// 	</thead>
+	// ";
 	echo "<tbody>";
 	
 	$prevPoNumber = '';
@@ -206,31 +206,13 @@
 				$prevPoNumber = $poNumber;
 			}
 			
-			// $tableContent .= "
-			// 	<tr>
-			// 		<td>".++$count."</td>
-			// 		<td>".$poNumber."</td>
-			// 		<td>".++$no."</td>
-			// 		<td>".$supplierAlias."</td>
-			// 		<td>".$supplierName."</td>
-			// 		<td>".$issueDate."</td>
-			// 		<td>".$receivingDate."</td>
-			// 		<td>".$itemName."</td>
-			// 		<td>".$itemDescription."</td>
-			// 		<td>".$itemQuantity."</td>
-			// 		<td>".$sign."</td>
-			// 		<td>".$priceInFormat."</td>
-			// 		<td>".$totalPriceInFormat."</td>
-			// 		<td>".$status."</td>
-			// 		<td>".$actualFinish."</td>
-			// 		<td>".$lotNumber."</td>
-			// 	</tr>
-			// ";			
 			$tableContent .= "
 				<tr>
 					<td>".++$count."</td>
 					<td>".$poNumber."</td>
+					<td>".++$no."</td>
 					<td>".$supplierAlias."</td>
+					<td>".$supplierName."</td>
 					<td>".$issueDate."</td>
 					<td>".$receivingDate."</td>
 					<td>".$itemName."</td>
@@ -240,9 +222,27 @@
 					<td>".$priceInFormat."</td>
 					<td>".$totalPriceInFormat."</td>
 					<td>".$status."</td>
+					<td>".$actualFinish."</td>
 					<td>".$lotNumber."</td>
 				</tr>
 			";			
+			// $tableContent .= "
+			// 	<tr>
+			// 		<td>".++$count."</td>
+			// 		<td>".$poNumber."</td>
+			// 		<td>".$supplierAlias."</td>
+			// 		<td>".$issueDate."</td>
+			// 		<td>".$receivingDate."</td>
+			// 		<td>".$itemName."</td>
+			// 		<td>".$itemDescription."</td>
+			// 		<td>".$itemQuantity."</td>
+			// 		<td>".$sign."</td>
+			// 		<td>".$priceInFormat."</td>
+			// 		<td>".$totalPriceInFormat."</td>
+			// 		<td>".$status."</td>
+			// 		<td>".$lotNumber."</td>
+			// 	</tr>
+			// ";			
 		}
 	}
 	
