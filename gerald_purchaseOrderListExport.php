@@ -62,20 +62,21 @@
 		<thead>
 			<tr>
 				<th></th>
-				<th>PO<br>".displayText('L855')."</th>
-				<th>NO.</th>
+				<th>".displayText('L342')."</th>
 				<th>".displayText('L367')."</th>
 				<th>".displayText('L516')."</th>
-				<th>".displayText('L342')."</th>
-				<th>".displayText('L132')."</th>
+				<th>PO<br>".displayText('L855')."</th>
+				<th>NO.</th>
 				<th>".displayText('L246')."</th>
 				<th>".displayText('L247')."</th>
 				<th>".displayText('L31')."</th>
-				<th>".displayText('L112')."</th>
+				<th>".displayText('L612')."</th>
 				<th>".displayText('L32')."</th>
 				<th>".displayText('L743')."</th>
-				<th>".displayText('L172')."</th>
+				<th>".displayText('L132')."</th>
 				<th>".displayText('L1698')."</th>
+				<th>".displayText('L172')."</th>
+				<th>".displayText('L45')."</th>
 			</tr>
 		</thead>
 	";
@@ -104,7 +105,7 @@
 	$prevPoNumber = '';
 	$tableContent = "";	
 	$count = 0;
-	$sql = "SELECT GROUP_CONCAT(poContentId ORDER BY poContentId SEPARATOR ',') as poContentIds, `poNumber`, `lotNumber`, `productId`, `itemName`, `itemDescription`, `itemQuantity`, SUM(itemPrice) as totalItemPrice, supplierAlias, issueDate, receivingDate FROM `purchasing_pocontents` WHERE `poNumber` IN('".implode("','",$poNumberArray)."') AND itemStatus != 2 GROUP BY poNumber, lotNumber ORDER BY poNumber, receivingDate, dataOne, lotNumber";
+	$sql = "SELECT GROUP_CONCAT(poContentId ORDER BY poContentId SEPARATOR ',') as poContentIds, `poNumber`, `lotNumber`, `productId`, `itemName`, `itemDescription`, `itemQuantity`, `itemUnit`, SUM(itemPrice) as totalItemPrice, supplierAlias, issueDate, receivingDate, itemRemarks FROM `purchasing_pocontents` WHERE `poNumber` IN('".implode("','",$poNumberArray)."') AND itemStatus != 2 GROUP BY poNumber, lotNumber ORDER BY poNumber, receivingDate, dataOne, lotNumber";
 	$querySupplyPo = $db->query($sql);
 	if($querySupplyPo->num_rows > 0)
 	{
@@ -115,12 +116,14 @@
 			$lotNumber = $resultSupplyPo['lotNumber'];
 			$productId = $resultSupplyPo['productId'];
 			$itemQuantity = $resultSupplyPo['itemQuantity'];
+			$itemUnit = $resultSupplyPo['itemUnit'];
 			$totalItemPrice = $resultSupplyPo['totalItemPrice'];
 			$supplierAlias = $resultSupplyPo['supplierAlias'];
 			$issueDate = $resultSupplyPo['issueDate'];
 			$receivingDate = $resultSupplyPo['receivingDate'];
 			$itemName = $resultSupplyPo['itemName'];
 			$itemDescription = $resultSupplyPo['itemDescription'];
+			$itemRemarks = $resultSupplyPo['itemRemarks'];
 			
 			$poCurrency = $poCurrencyArray[$poNumber];
 			$supplierName = $supplierNameArray[$poNumber];
@@ -147,9 +150,19 @@
 				$partId = $resultLotList['partId'];
 			}			
 			
+			$unitName = '';
+			$sql = "SELECT unitName FROM purchasing_units WHERE unitId = ".$itemUnit." LIMIT 1";
+			$queryUnits = $db->query($sql);
+			if($queryUnits AND $queryUnits->num_rows > 0)
+			{
+				$resultUnits = $queryUnits->fetch_assoc();
+				$unitName = $resultUnits['unitName'];
+			}
+			
 			$lotNumberArray = array();
 			if($identifier==1)
 			{
+				$unitName = "個";
 				$itemName = $itemDescription;
 				$itemDescription = '';
 				
@@ -209,20 +222,20 @@
 			$tableContent .= "
 				<tr>
 					<td>".++$count."</td>
-					<td>".$poNumber."</td>
-					<td>".++$no."</td>
+					<td>".$issueDate."</td>
 					<td>".$supplierAlias."</td>
 					<td>".$supplierName."</td>
-					<td>".$issueDate."</td>
-					<td>".$receivingDate."</td>
+					<td>".$poNumber."</td>
+					<td>".++$no."</td>
 					<td>".$itemName."</td>
 					<td>".$itemDescription."</td>
 					<td>".$itemQuantity."</td>
-					<td>".$sign."</td>
+					<td>".$unitName."</td>
 					<td>".$priceInFormat."</td>
 					<td>".$totalPriceInFormat."</td>
-					<td>".$status."</td>
+					<td>".$receivingDate."</td>
 					<td>".$actualFinish."</td>
+					<td>".$itemRemarks."</td>
 					<td>".$lotNumber."</td>
 				</tr>
 			";			
