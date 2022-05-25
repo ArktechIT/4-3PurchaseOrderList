@@ -48,7 +48,7 @@ if(count($sqlFilterArray) > 0)
     $sqlFilter = " WHERE ".implode(" AND ",$sqlFilterArray)." ";
 }
 
-$sql = "SELECT * FROM purchasing_podetailsnew".$sqlFilter." ORDER BY poNumber DESC";
+$sql = "SELECT * FROM purchasing_podetailsnew".$sqlFilter." ORDER BY CAST(poNumber as unsigned) DESC";
 $query = $db->query($sql);
 if($query AND $query->num_rows > 0)
 {
