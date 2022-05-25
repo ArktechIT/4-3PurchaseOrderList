@@ -206,6 +206,7 @@ if($query AND $query->num_rows > 0)
 
         $link = "<ul style='list-style: none; margin: 0px;'>
                     <li style='display: inline-block'><span style='cursor:pointer;text-decoration:underline;color:blue;' onclick=\"viewPDF('".$modalURL."')\">".$poNumber."</span></li>
+                    <li style='display: inline-block'><img onclick=\" window.open('gerald_viewPOStatus.php?poNumber=".$poNumber."', 'newwindow', 'left=300,top=200,resizable,scrollbars,status,width=1200,height=600'); \" class='viewClass' src='/".v."/Common Data/Templates/images/view1.png' width='15' height='15' alt='VIEW' title='VIEW'></li>
                     <li style='display: inline-block; float: right;'>
                         <a href='darwin_purchaseOrderCSV.php?poNumber=".$poNumber."'><img src='/".v."/Common Data/Templates/images/excel.png' height='15' title='Download CSV'></a>
                     </li>
